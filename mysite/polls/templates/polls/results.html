@@ -1,0 +1,28 @@
+{% extends 'polls/base.html' %}
+{% block title %}Result: {{question.question_text}}{% endblock title %}
+{% block title_page %}Results{% endblock title_page %}
+
+
+{% block content %}
+
+
+<h4 class="text-primary">{{question.question_text|upper}}</h4>
+
+
+<br>
+
+<ul class="list-group ">
+
+{% for choice in question.choice_set.all %}
+    <li class="list-group-item"><strong>{{ choice.choice_text }}</strong> <span class="badge badge-success">{{ choice.votes }}</span></li>
+    {% endfor %}
+</ul>
+
+<li class="list-group-item"><h4>Total Votes: {{total}}</h4></li>
+<br>
+
+
+
+<a href="{% url 'polls:detail' question.id %}" class="btn btn-primary">Vote again?</a>
+
+{% endblock content %}
